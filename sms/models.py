@@ -14,3 +14,5 @@ class Order(models.Model):
             return True
         else:
             return False
+    class Meta:
+       indexes = [models.Index(fields=['phone'])]
