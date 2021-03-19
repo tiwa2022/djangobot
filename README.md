@@ -1,23 +1,38 @@
+# Django Bot
+
+A TWILIO SMS bot in Django with a SMS simulator.
+
+1. `python3 -m pip install django`
+1. `python3 manage.py migrate`
+1. `python3 manage.py test`
+1. `python3 manage.py runserver`
+1. follow the link to the bot
+
+*Note try the `inclass` branch for a more complete example
+
+The code that you change is:
+
+```
 from django.db import models
 
+# Create your models here.
+
+
 class Order(models.Model):
-    # Model has 2 attributes. Phone and a dict called data.
     phone = models.CharField(max_length=255, default='')
     data = models.JSONField()
 
     def handleInput(self, sInput):
-        # this is called for each turn
         # self.data["state"] starts out as WELCOMING
         aReturn = []
         return aReturn
 
     def isDone(self):
-        # this is also called for each turn
         if self.data["state"] == "DONE":
             return True
         else:
             return False
 
     class Meta:
-        # this sets up a SQL index on the phone field
         indexes = [models.Index(fields=['phone'])]
+```
