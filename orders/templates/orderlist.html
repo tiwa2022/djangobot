@@ -1,0 +1,10 @@
+Rich was here
+
+<form action="." method="post">
+    {% csrf_token %}
+{% for order in orders %}
+<p>
+    {{ order.phone}} {{order.data.state}} <button type="submit" name="delete" value="{{order.id}}">X</button>
+</p>
+{% endfor %}
+</form>
