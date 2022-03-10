@@ -9,31 +9,18 @@ class Order(models.Model):
         aReturn = []
         sState = self.data["state"]
         if sState == "WELCOMING":
-            aReturn.append("Welcome to Rich's pizza")
-            aReturn.append("Would you like a SMALL, MEDIUM, or LARGE?")
-            self.data["state"] = "SIZE"
-        elif sState == "SIZE":
-            self.data["size"] = sInput.lower()
-            aReturn.append("What toppings would you like?")
-            aReturn.append("(please enter a list with commas)")
-            self.data["state"] = "TOPPINGS"
-        elif sState == "TOPPINGS":
-            self.data["toppings"] = sInput.lower()
-            aReturn.append("Would you like drinks with that?")
-            aReturn.append("(please enter a list with commas or NO)")
-            self.data["state"] = "DRINKS"
-        elif sState == "DRINKS":
-            if sInput.lower() != "no":
-                self.data["drinks"] = sInput.lower()
-            aReturn.append("Thank you for your order")
-            aReturn.append(self.data["size"] + " pizza. With " + self.data["toppings"])
-            try:
-                aReturn.append(self.data["drinks"])
-            except:
-                pass
-            aReturn.append("Please pickup in 20 minutes")
+            aReturn.append("Welcome to Rich's Rapid Test.")
+            aReturn.append("Would you like to reserve a rapid test kit?")
+            self.data["state"] = "RESERVING"
+        elif sState == "RESERVING":
+            self.data["reserved"] = sInput.lower()
             self.data["state"] = "DONE"
-
+            if sInput.lower()[0]  == 'y':
+                aReturn.append("Your rapid test is reserved under the phone number " +  self.phone)
+            else:
+                aReturn.append("Thanks for trying our reservation system")
+                aReturn.append_history_file("Maybe next time")
+             
         return aReturn
     def isDone(self):
         if self.data["state"] == "DONE":
