@@ -19,7 +19,7 @@ class Order(models.Model):
                 aReturn.append("Your rapid test is reserved under the phone number " +  self.phone)
             else:
                 aReturn.append("Thanks for trying our reservation system")
-                aReturn.append_history_file("Maybe next time")
+                aReturn.append("Maybe next time")
              
         return aReturn
     def isDone(self):
